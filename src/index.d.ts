@@ -48,7 +48,7 @@ declare module 'react-native-screens' {
   export type ScreenReplaceTypes = 'push' | 'pop';
 
   export interface ScreenProps extends ViewProps {
-    active?: 0 | 1 | Animated.AnimatedInterpolation;
+    active?: 0 | 1 | 2 | Animated.AnimatedInterpolation;
     onComponentRef?: (view: any) => void;
     children?: React.ReactNode;
 
@@ -56,14 +56,6 @@ declare module 'react-native-screens' {
      * @description All children screens should have the same value of their "enabled" prop as their container.
      */
     enabled?: boolean;
-    /**
-     * @description Value used to indicate if this screen is currently transitioning.
-     */
-    transitioning?: Animated.AnimatedInterpolation;
-    /**
-     * @description Boolean saying if the current screen is currently visible/on top of the stack.
-     */
-    isTop?: boolean;
     /**
      * @description A callback that gets called when the current screen will appear. This is called as soon as the transition begins.
      */

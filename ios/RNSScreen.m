@@ -27,8 +27,6 @@
     _stackPresentation = RNSScreenStackPresentationPush;
     _stackAnimation = RNSScreenStackAnimationDefault;
     _gestureEnabled = YES;
-    _transitioning = NO;
-    _isTop = NO;
     _replaceAnimation = RNSScreenReplaceAnimationPop;
     _dismissed = NO;
   }
@@ -60,7 +58,7 @@
   [_bridge.uiManager setSize:self.bounds.size forView:self];
 }
 
-- (void)setActive:(BOOL)active
+- (void)setActive:(int)active
 {
   if (active != _active) {
     _active = active;
@@ -153,22 +151,6 @@
   #endif
 
   _gestureEnabled = gestureEnabled;
-}
-
-- (void)setTransitioning:(BOOL)transitioning
-{
-  if (_transitioning != transitioning) {
-    _transitioning = transitioning;
-    self.userInteractionEnabled = !_transitioning;
-  }
-}
-
-- (void)setIsTop:(BOOL)isTop
-{
-  _isTop = isTop;
-  if (_isTop) {
-    [self notifyFinishTransitioning];
-  }
 }
 
 - (void)setReplaceAnimation:(RNSScreenReplaceAnimation)replaceAnimation
@@ -402,10 +384,8 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_VIEW_PROPERTY(active, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(active, int)
 RCT_EXPORT_VIEW_PROPERTY(gestureEnabled, BOOL)
-RCT_EXPORT_VIEW_PROPERTY(transitioning, BOOL)
-RCT_EXPORT_VIEW_PROPERTY(isTop, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(replaceAnimation, RNSScreenReplaceAnimation)
 RCT_EXPORT_VIEW_PROPERTY(stackPresentation, RNSScreenStackPresentation)
 RCT_EXPORT_VIEW_PROPERTY(stackAnimation, RNSScreenStackAnimation)
@@ -448,4 +428,3 @@ RCT_ENUM_CONVERTER(RNSScreenReplaceAnimation, (@{
 
 
 @end
-

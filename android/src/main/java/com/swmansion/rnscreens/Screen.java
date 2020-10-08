@@ -53,7 +53,7 @@ public class Screen extends ViewGroup {
 
   private @Nullable ScreenFragment mFragment;
   private @Nullable ScreenContainer mContainer;
-  private boolean mActive;
+  private int mActive;
   private boolean mTransitioning;
   private boolean mIsTop;
   private StackPresentation mStackPresentation = StackPresentation.PUSH;
@@ -152,27 +152,7 @@ public class Screen extends ViewGroup {
       return;
     }
     mTransitioning = transitioning;
-    if (mIsTop && mContainer != null) {
-      // only the top screen should be transitioning, but we make sure it is the one
-      // and then we change layer type for all screens in the container for during transitioning
-      for (int i = 0, size = mContainer.mScreenFragments.size(); i < size; i++) {
-        ScreenFragment screenFragment = (ScreenFragment) mContainer.mScreenFragments.get(i);
-        if (screenFragment != null) {
-          screenFragment.mScreenView.changeLayerType(mTransitioning);
-        }
-      }
-    }
-  }
-
-  public void changeLayerType(boolean transitioning) {
     super.setLayerType(transitioning ? View.LAYER_TYPE_HARDWARE : View.LAYER_TYPE_NONE, null);
-  }
-
-  public void setIsTop(boolean isTop) {
-    if (mIsTop == isTop) {
-      return;
-    }
-    mIsTop = isTop;
   }
 
   public void setStackPresentation(StackPresentation stackPresentation) {
@@ -224,7 +204,7 @@ public class Screen extends ViewGroup {
     return mContainer;
   }
 
-  public void setActive(boolean active) {
+  public void setActive(int active) {
     if (active == mActive) {
       return;
     }
@@ -234,7 +214,7 @@ public class Screen extends ViewGroup {
     }
   }
 
-  public boolean isActive() {
+  public int getActive() {
     return mActive;
   }
 
