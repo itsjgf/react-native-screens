@@ -26,13 +26,13 @@ public class ScreenViewManager extends ViewGroupManager<Screen> {
     return new Screen(reactContext);
   }
 
-  @ReactProp(name = "active")
-  public void setActive(Screen view, int active) {
-    if (active == 0) {
+  @ReactProp(name = "activityState")
+  public void setActivityState(Screen view, int activityState) {
+    if (activityState == 0) {
       view.setActivityState(Screen.ActivityState.INACTIVE);
-    } else if (active == 1) {
+    } else if (activityState == 1) {
       view.setActivityState(Screen.ActivityState.TRANSITIONING_OR_BELOW_TOP);
-    } else if (active == 2) {
+    } else if (activityState == 2) {
       view.setActivityState(Screen.ActivityState.ON_TOP);
     }
   }
