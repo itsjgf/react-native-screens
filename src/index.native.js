@@ -28,7 +28,7 @@ function enableScreens(shouldEnableScreens = true) {
 }
 
 // const that tells if the library should use new implementation, will be undefined for older versions
-const shouldUseNewImplementation = true;
+const shouldUseActivityState = true;
 
 // we should remove this at some point
 function useScreens(shouldUseScreens = true) {
@@ -218,5 +218,5 @@ module.exports = {
   useScreens,
   screensEnabled,
 
-  shouldUseNewImplementation,
+  shouldUseActivityState,
 };

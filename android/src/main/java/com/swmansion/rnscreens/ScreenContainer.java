@@ -209,10 +209,10 @@ public class ScreenContainer<T extends ScreenFragment> extends ViewGroup {
         @Override
         public void run() {
           if (mProcessingTransaction == transaction) {
-           // we need to take into account that commit is initiated with some other transaction while
-           // the previous one is still processing. In this case mProcessingTransaction gets overwritten
-           // and we don't want to set it to null until the second transaction is finished.
-           mProcessingTransaction = null;
+            // we need to take into account that commit is initiated with some other transaction while
+            // the previous one is still processing. In this case mProcessingTransaction gets overwritten
+            // and we don't want to set it to null until the second transaction is finished.
+            mProcessingTransaction = null;
           }
         }
       });
@@ -235,12 +235,12 @@ public class ScreenContainer<T extends ScreenFragment> extends ViewGroup {
     getOrCreateTransaction().remove(screenFragment);
   }
 
-  protected int getScreenActive(ScreenFragment screenFragment) {
-    return screenFragment.getScreen().getActive();
+  protected Screen.ActivityState getActivityState(ScreenFragment screenFragment) {
+    return screenFragment.getScreen().getActivityState();
   }
 
   protected boolean isScreenActive(ScreenFragment screenFragment) {
-    return getScreenActive(screenFragment) != 0;
+    return getActivityState(screenFragment) != Screen.ActivityState.INACTIVE;
   }
 
   protected boolean hasScreen(ScreenFragment screenFragment) {
@@ -360,8 +360,8 @@ public class ScreenContainer<T extends ScreenFragment> extends ViewGroup {
 
     for (int i = 0, size = mScreenFragments.size(); i < size; i++) {
       ScreenFragment screenFragment = mScreenFragments.get(i);
-      int active = getScreenActive(screenFragment);
-      if (active == 2) {
+      Screen.ActivityState active = getActivityState(screenFragment);
+      if (active == Screen.ActivityState.ON_TOP) {
         // top screen gets the active value of 2 after the end of transition
         transitioning = false;
       }
