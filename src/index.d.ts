@@ -48,7 +48,7 @@ declare module 'react-native-screens' {
   export type ScreenReplaceTypes = 'push' | 'pop';
 
   export interface ScreenProps extends ViewProps {
-    active?: 0 | 1 | 2 | Animated.AnimatedInterpolation;
+    activityState?: 0 | 1 | 2 | Animated.AnimatedInterpolation;
     onComponentRef?: (view: any) => void;
     children?: React.ReactNode;
 
