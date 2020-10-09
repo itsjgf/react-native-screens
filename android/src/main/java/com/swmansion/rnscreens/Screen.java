@@ -149,8 +149,8 @@ public class Screen extends ViewGroup {
 
   /**
    * While transitioning this property allows to optimize rendering behavior on Android and provide
-   * a correct blending options for the animated screen. It is turned on from JS for during the transition
-   * and turned off immediately after.
+   * a correct blending options for the animated screen. It is turned on automatically by the container
+   * when transitioning is detected and turned off immediately after
    */
   public void setTransitioning(boolean transitioning) {
     if (mTransitioning == transitioning) {
